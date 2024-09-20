@@ -1,0 +1,580 @@
+<ion-header *ngIf="IdNumberValidated">
+  <ion-toolbar>
+    <ion-title
+      >Indigent Application Report - {{model.Application_Reference}}</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div id="container" *ngIf="!IdNumberValidated">
+    <form #validate="ngForm" novalidate>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-item>
+              <ion-input
+                label="ID Number:"
+                labelPlacement="floating"
+                placeholder=""
+                [(ngModel)]="ID_Number"
+                minlength="13"
+                maxlength="13"
+                name="idNumber"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <ion-button
+              expand="block"
+              color="primary"
+              id="ConsentModal"
+              (click)="validateIDNumber()"
+              [disabled]="!validate.form.valid || ID_Number?.length !== 13"
+            >
+              Validate
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+
+  <ion-list *ngIf="IdNumberValidated">
+    <ion-grid class="section-header1">
+      <ion-row class="ion-padding">
+        <ion-col size="12" size-md="10">
+          <div class="h4">
+            <span *ngIf="model.Person_names || model.Surname">
+              {{ (model.Person_names || '') + ' ' + (model.Surname || '') + ' '
+              }}
+            </span>
+            <span
+              *ngIf="(model.Person_names || model.Surname) && model.ID_Number"
+            >
+              [{{ model.ID_Number }}]
+            </span>
+          </div>
+          <br />
+          <span>Captured by: {{ model.Captured_By }}</span>
+          <br />
+          <span>Captured Date: {{ captureDate }}</span>
+          <br /><br />
+          <span
+            >Municipal Account Number 1: {{ model.Municipal_Account_Number
+            }}</span
+          >
+          <br />
+          <span
+            >Municipal Account Number 2: {{ model.Municipal_Account_2 }}</span
+          >
+        </ion-col>
+        <ion-col size="12" size-md="2">
+          <div *ngIf="selfieImages.length > 0" class="selfie-container">
+            <div *ngFor="let image of selfieImages">
+              <img [src]="image" alt="Selfie Image" height="175" />
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row class="input-container ion-padding">
+        <!-- Approved Section -->
+        <ion-col
+          size="12"
+          size-md="2"
+          class="text-center ion-align-self-center"
+        >
+          <ion-label class="ion-label-styled">Approved:</ion-label>
+        </ion-col>
+        <ion-col size="12" size-md="2" class="text-center">
+          <ion-input
+            [(ngModel)]="model.Approved"
+            name="approved"
+            readonly
+            class="ion-input-styled"
+            [ngClass]="{'alert-success': model.Approved === 'Yes', 'alert-danger': model.Approved === 'No'}"
+          ></ion-input>
+        </ion-col>
+
+        <!-- Reason Code Section -->
+        <ion-col
+          size="12"
+          size-md="2"
+          class="text-center ion-align-self-center"
+        >
+          <ion-label class="ion-label-styled">Reason Code:</ion-label>
+        </ion-col>
+        <ion-col size="12" size-md="2" class="text-center">
+          <ion-input
+            [(ngModel)]="model.Reason_Code"
+            name="reasonCode"
+            readonly
+            class="ion-input-styled"
+            [ngClass]="{'alert-success': model.Approved === 'Yes', 'alert-danger': model.Approved === 'No'}"
+          ></ion-input>
+        </ion-col>
+
+        <!-- Expiry Section -->
+        <ion-col
+          size="12"
+          size-md="2"
+          class="text-center ion-align-self-center"
+        >
+          <ion-label class="ion-label-styled">Expiry:</ion-label>
+        </ion-col>
+        <ion-col size="12" size-md="2" class="text-center">
+          <ion-input
+            [(ngModel)]="model.Expiry"
+            name="expiry"
+            readonly
+            class="ion-input-styled"
+            [ngClass]="{'alert-success': model.Approved === 'Yes', 'alert-danger': model.Approved === 'No'}"
+          ></ion-input>
+        </ion-col>
+      </ion-row>
+
+      <!-- Rejection Reason Section -->
+      <ion-row class="ion-padding">
+        <ion-col size="12" size-md="2" class="text-center ion-align-self-top">
+          <ion-label class="ion-label-styled">Rejection Reason:</ion-label>
+        </ion-col>
+        <ion-col size="12" size-md="10"
+          ><div
+            class="ion-padding ion-background-light ion-text-wrap"
+            [innerHTML]="splitLines(model.Reason)"
+            name="reason"
+            [ngClass]="{
+              'alert-success': model.Approved === 'Yes',
+              'alert-danger': model.Approved === 'No'
+            }"
+          ></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid
+      ><div class="section-header">
+        <strong>Indigent Application Details</strong>
+      </div>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Appeal:"
+              labelPlacement="Fixed label"
+              [(ngModel)]="model.Appeal"
+              name="appeal"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Appeal Reason:"
+              [(ngModel)]="model.Appeal_Reason"
+              name="appealReason"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Override Date:"
+              [(ngModel)]="model.Over_Ride_Date"
+              name="overrideDate"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Override Reason:"
+              [(ngModel)]="model.Over_Ride_Reason"
+              name="overrideReason"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Override User:"
+              [(ngModel)]="model.Over_Ride_User"
+              name="overrideUser"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Appeal Outcome:"
+              [(ngModel)]="model.Appeal_Outcome"
+              name="outcome"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="ID Number:"
+              [(ngModel)]="model.ID_Number"
+              name="idNumber"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Full Names:"
+              [(ngModel)]="model.Person_names"
+              name="fullname"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Surname:"
+              [(ngModel)]="model.Surname"
+              name="surname"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Date of Birth:"
+              [(ngModel)]="model.DOB"
+              name="dob"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Age Bracket:"
+              [(ngModel)]="model.Age_Bracket"
+              name="ageBracket"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Gender:"
+              [(ngModel)]="model.Gender"
+              name="gender"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              label="Address line 1:"
+              class="ion-text-right"
+              [(ngModel)]="model.Physical_Address_1"
+              name="address1"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Address line 2:"
+              [(ngModel)]="model.Physical_Address_2"
+              name="address2"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Address line 3:"
+              [(ngModel)]="model.Physical_Address_3"
+              name="address3"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Postal Code:"
+              [(ngModel)]="model.Physical_Cade"
+              name="postal"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Municipal Account No 1:"
+              [(ngModel)]="model.Municipal_Account_Number"
+              name="munaccNo"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Municipal Account No 2:"
+              [(ngModel)]="model.Municipal_Account_2"
+              name="munaccNo2"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Cell:"
+              [(ngModel)]="model.Cell_1"
+              name="cell1"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Email:"
+              [(ngModel)]="model.Email_1"
+              name="email1"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Occupation:"
+              [(ngModel)]="model.Occupation"
+              name="occupation"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Salary:"
+              [(ngModel)]="model.Salary"
+              name="salary"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Remarks:"
+              [(ngModel)]="model.Remarks"
+              name="remarks"
+              readonly
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12" size-md="6">
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Receive Sassa:"
+              [(ngModel)]="model.Receive_Sassa"
+              name="sassa"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Sassa Status:"
+              [(ngModel)]="model.Sassa_Status"
+              name="sassaStatus"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Pay UIF:"
+              [(ngModel)]="model.Pay_UIF"
+              name="payUIF"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Director of Companies:"
+              [(ngModel)]="model.Director_Of_Companies"
+              name="directorCompanies"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Is Home Owner:"
+              [(ngModel)]="model.Is_Home_Owner"
+              name="ishomeOwner"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Estimated Income:"
+              [(ngModel)]="model.Estimated_Income"
+              name="estimatedIncome"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Current Bond Amount:"
+              [(ngModel)]="model.Current_Bond_Amount"
+              name="currentBondAmt"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Known Car:"
+              [(ngModel)]="model.Known_Car"
+              name="knownCar"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Household Income:"
+              [(ngModel)]="model.Household_Income"
+              name="household"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Known Bank Account:"
+              [(ngModel)]="model.Know_Bank_Account"
+              name="knownbankAcc"
+              readonly
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="ion-text-right"
+              label="Properties:"
+              [(ngModel)]="model.Property_Count"
+              name="properties"
+              readonly
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-button
+        expand="block"
+        (click)="setOpen(true)"
+        [disabled]="loadingImages"
+        >Application Images</ion-button
+      >
+
+      <ion-modal [isOpen]="isModalOpen">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-title>Application Images</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="closeModal()">Close</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="scrollable-modal">
+            <ion-grid>
+              <div class="section-header mt-2">Signature Images</div>
+              <ion-row>
+                <!-- <app-application-images
+                  [Name]="'Left thumb'"
+                  [Image]="Left_Thumb"
+                ></app-application-images> -->
+                <ion-col size="6">
+                  <div *ngIf="leftThumbImages.length > 0">
+                    <ion-card *ngFor="let leftThumb of leftThumbImages">
+                      <ion-card-content>
+                        <img [src]="leftThumb" alt="Signature 1" />
+                      </ion-card-content>
+                    </ion-card>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div *ngIf="rightThumbImages.length > 0">
+                    <ion-card *ngFor="let rightThumb of rightThumbImages">
+                      <ion-card-content>
+                        <img [src]="rightThumb" alt="Signature 2" />
+                      </ion-card-content>
+                    </ion-card>
+                  </div>
+                </ion-col>
+              </ion-row>
+
+              <div class="section-header mt-2">Identification Images</div>
+              <ion-row>
+                <ion-col size="6">
+                  <div *ngIf="idDocumentImages.length > 0">
+                    <ion-card *ngFor="let image of idDocumentImages">
+                      <ion-card-content>
+                        <img [src]="image" alt="ID Document Image" />
+                      </ion-card-content>
+                    </ion-card>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div *ngIf="selfieImages.length > 0">
+                    <ion-card *ngFor="let image of selfieImages">
+                      <ion-card-content>
+                        <img [src]="image" alt="Selfie Image" />
+                      </ion-card-content>
+                    </ion-card>
+                  </div>
+                </ion-col>
+              </ion-row>
+
+              <div class="section-header mt-2">Other Images</div>
+              <ion-row>
+                <ion-col size="4">
+                  <div *ngIf="municipalAccountImages.length > 0">
+                    <ion-card *ngFor="let image of municipalAccountImages">
+                      <ion-card-content>
+                        <img [src]="image" alt="Municipal Account Image" />
+                      </ion-card-content>
+                    </ion-card>
+                  </div>
+                </ion-col>
+                <ion-col size="4">
+                  <div *ngIf="payslipImages.length > 0">
+                    <ion-card *ngFor="let image of payslipImages">
+                      <ion-card-content>
+                        <img [src]="image" alt="Payslip Image" />
+                      </ion-card-content>
+                    </ion-card>
+                  </div>
+                </ion-col>
+                <ion-col size="4">
+                  <div *ngIf="sassaCardImages.length > 0">
+                    <ion-card *ngFor="let image of sassaCardImages">
+                      <ion-card-content>
+                        <img [src]="image" alt="SASSA Card Image" />
+                      </ion-card-content>
+                    </ion-card>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </ion-grid>
+  </ion-list>
+</ion-content>

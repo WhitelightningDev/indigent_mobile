@@ -1,0 +1,38 @@
+ion-card {
+    margin: 16px;
+  }
+  
+  ion-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .camera-container {
+    //position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px; // Match the height set in component
+    width: 100%;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  
+  .camera-preview {
+    position: absolute;
+    width: 350px;  // Match the width set in component
+    height: 350px; // Match the height set in component
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: black; // Background color to distinguish the preview area
+  
+  }
+  
+  img {
+    max-width: 100%;
+    margin-top: 16px;
+    border-radius: 8px;
+  }
+  

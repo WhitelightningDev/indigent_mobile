@@ -1,0 +1,367 @@
+<ion-content>
+  <div class="progress" *ngIf="loading">
+    <div
+      class="progress-bar progress-bar-striped progress-bar-animated"
+      role="progressbar"
+      aria-valuenow="100"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      style="width: 100%"
+    >
+      Loading
+    </div>
+  </div>
+
+  <div
+    id="container"
+    *ngIf="!IdNumberValidated || IdNumberValidated   && !ConsentValidated"
+  >
+    <form #validate="ngForm" novalidate>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-item>
+              <ion-input
+                label="ID Number:"
+                labelPlacement="floating"
+                placeholder=""
+                [(ngModel)]="model.ID_Number"
+                minlength="13"
+                maxlength="13"
+                name="idNumber"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <ion-button
+              expand="block"
+              color="primary"
+              id="ConsentModal"
+              [disabled]="!validate.form.valid || model.ID_Number?.length !== 13"
+              (click)="validateIDNumber()"
+            >
+              Validate
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+
+  <form #registerForm="ngForm" novalidate>
+    <ion-grid *ngIf="IdNumberValidated && ConsentValidated">
+      <ion-row>
+        <ion-col size="12" size-md="8">
+          <ion-list>
+            <ion-item>
+              <ion-input
+                label="ID Number:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.ID_Number"
+                name="idNumber"
+                readonly
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Full Names:"
+                labelPlacement="floating"
+                placeholder="Enter Full Name"
+                [(ngModel)]="model.Person_Names"
+                name="First_Names"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Surname:"
+                labelPlacement="floating"
+                placeholder="Enter Surname"
+                [(ngModel)]="model.Surname"
+                name="Surname"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Date of Birth:"
+                labelPlacement="floating"
+                placeholder="YYYY-MM-DD"
+                type="text"
+                [(ngModel)]="model.DOBDate"
+                (ngModelChange)="onDateInputChange($event, 'DOBDate')"
+                name="DOBDate"
+                maxlength="10"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="ID Issue Date:"
+                labelPlacement="floating"
+                placeholder="YYYY-MM-DD"
+                type="text"
+                [(ngModel)]="model.ID_Issue_Date"
+                (ngModelChange)="onDateInputChange($event, 'ID_Issue_Date')"
+                name="IssueDate"
+                maxlength="10"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Cell Number:"
+                labelPlacement="floating"
+                placeholder="+27 00 000 000"
+                [(ngModel)]="model.Cell"
+                name="cell"
+              ></ion-input
+              ><ion-button
+                expand="full"
+                color="primary"
+                slot="end"
+                id="Cell"
+                (click)="openModal()"
+              >
+                Validate
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Email:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.email_Address"
+                name="email"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Find Address:"
+                labelPlacement="floating"
+                name="Address"
+                #addressInput
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Address 1:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.Address_1"
+                name="Address_1"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Address 2:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.Address_2"
+                name="Address_2"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Address 3:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.Address_3"
+                name="Address_3"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Postal Code:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                type="number"
+                [(ngModel)]="model.Postal_Code"
+                name="Postal_Code"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Dependents:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.Dependents"
+                name="Dependents"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Municipal Account 1:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.Account_Number"
+                name="munacc1"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Municipal Account 2:"
+                labelPlacement="floating"
+                placeholder="Enter text"
+                [(ngModel)]="model.Municipal_Account_2"
+                name="munacc2"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-select
+                [(ngModel)]="model.Village"
+                name="villages"
+                interface="action-sheet"
+                label="Village:"
+                label-placement="floating"
+              >
+                <ion-select-option
+                  *ngFor="let village of villages"
+                  [value]="village.Village_Name"
+                >
+                  {{ village.Village_Name }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Ward"
+                labelPlacement="floating"
+                placeholder="Enter Ward no"
+                type="number"
+                [(ngModel)]="model.Ward"
+                name="ward"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-select
+                [(ngModel)]="model.Employed"
+                name="employee"
+                interface="action-sheet"
+                label="Employed:"
+                label-placement="floating"
+              >
+                <ion-select-option value="Disabled">Disabled</ion-select-option>
+                <ion-select-option value="Pensioner"
+                  >Pensioner</ion-select-option
+                >
+                <ion-select-option value="Employed">Employed</ion-select-option>
+                <ion-select-option value="Unemployed"
+                  >Unemployed</ion-select-option
+                >
+                <ion-select-option value="Covid – 19 Relieve Assistance"
+                  >Covid – 19 Relieve Assistance</ion-select-option
+                >
+                <ion-select-option value="Covid – 19 Retrenchment Assistance"
+                  >Covid – 19 Retrenchment Assistance</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-input
+                label="Employed At:"
+                labelPlacement="floating"
+                placeholder="Enter where currently Employed"
+                [(ngModel)]="model.Employed_At"
+                name="Employed_At"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input
+                label="Salary:"
+                labelPlacement="floating"
+                placeholder="Enter Salary"
+                type="number"
+                [(ngModel)]="model.Salary"
+                name="Salary"
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-textarea
+                label="Remarks:"
+                labelPlacement="floating"
+                placeholder="Enter remarks"
+                type="text"
+                [(ngModel)]="model.Remarks"
+                name="remarks"
+              ></ion-textarea>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col size="4" class="fixed-buttons">
+          <ion-button
+            expand="block"
+            color="primary"
+            class="col"
+            style="height: 54px"
+            [disabled]="submitting"
+            (click)="SubmitApplication()"
+          >
+            Next</ion-button
+          >
+          <ion-button
+            expand="block"
+            color="secondary"
+            class="col"
+            style="height: 54px"
+            (click)="IdNumberValidated = false"
+            [routerLink]="['/home']"
+          >
+            Cancel
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<ion-modal trigger="ConsentModal" [canDismiss]="canDismiss">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="onConsentDecline()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Consent</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="onConsentAccept()" [strong]="true"
+            >Confirm</ion-button
+          >
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="consent" [innerHtml]="consent"></div
+    ></ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #Cell trigger="Cell" [canDismiss]="canDismiss">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-input
+          label="Enter OTP"
+          type="text"
+          placeholder="OTP"
+          [(ngModel)]="otp"
+        ></ion-input>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>

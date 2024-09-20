@@ -1,0 +1,75 @@
+<!-- Show loading spinner while loading images -->
+<ion-card *ngIf="loading">
+  <ion-card-header>
+    <ion-card-title>Loading...</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-spinner></ion-spinner>
+  </ion-card-content>
+</ion-card>
+
+<!-- Show captured images with update button -->
+<ion-card *ngIf="!loading && !capturing && images.length > 0">
+  <ion-card-header>
+    <ion-card-title>Captured Images</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div style="display: flex; flex-wrap: wrap">
+      <div *ngFor="let image of images; let i = index" style="margin: 10px">
+        <img
+          *ngIf="image.src"
+          [src]="image.src"
+          alt="{{ image.shortDesc }}"
+          style="width: 150px; height: auto"
+        />
+        <p>{{ ImageDesc[i] }}</p>
+      </div>
+    </div>
+    <ion-button
+      expand="full"
+      *ngIf="!finalizeBtn"
+      (click)="startCaptureProcess()"
+      >Update Photo</ion-button
+    >
+    <ion-button expand="full" *ngIf="finalizeBtn" (click)="finalize()"
+      >Finalize</ion-button
+    >
+  </ion-card-content>
+</ion-card>
+
+<!-- Camera preview and capture buttons for taking photos -->
+<ion-card *ngIf="capturing">
+  <ion-card-header>
+    <ion-card-title>New Capture Photo</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ descriptions[currentDescriptionIndex] }}</p>
+    <div *ngIf="!showSignaturePad">
+      <!-- No longer using CameraPreview, just the placeholder for the camera -->
+      <img *ngIf="photo" [src]="photo" style="width: 100%" />
+    </div>
+    <div *ngIf="showSignaturePad">
+      <app-fingetprint-scan></app-fingetprint-scan>
+    </div>
+  </ion-card-content>
+  <ion-button expand="full" *ngIf="SaveButton" (click)="SavePhoto()"
+    >Update Photo</ion-button
+  >
+  <ion-button expand="full" *ngIf="!SaveButton" (click)="captureProcess()"
+    >Capture</ion-button
+  >
+  <ion-button expand="full" (click)="skipPhoto()">Skip</ion-button>
+</ion-card>
+
+<!-- Show message if no images are found and not capturing -->
+<ion-card *ngIf="!loading && !capturing && images.length === 0">
+  <ion-card-header>
+    <ion-card-title>No images found</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>Please capture photos to proceed.</p>
+    <ion-button expand="full" (click)="startCaptureProcess()"
+      >Start Capture</ion-button
+    >
+  </ion-card-content>
+</ion-card>

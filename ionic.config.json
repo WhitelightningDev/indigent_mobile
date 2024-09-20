@@ -1,0 +1,7 @@
+{
+  "name": "Bires",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

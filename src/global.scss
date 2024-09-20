@@ -1,0 +1,97 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+// @import "@ionic/angular/css/palettes/dark.system.css";
+@import '@ionic/angular/css/palettes/dark.class.css';
+@import '@ionic/angular/css/palettes/high-contrast.class.css';
+@import '@ionic/angular/css/palettes/high-contrast-dark.class.css';
+
+:root {
+    --ion-color-primary: #71B6F9;
+    --ion-color-primary-rgb: 113,182,249;
+    --ion-color-primary-contrast: #FFFFFF;
+    --ion-color-primary-contrast-rgb: 0,0,0;
+    --ion-color-primary-shade: #63A0DB;
+    --ion-color-primary-tint: #7FBDFA;
+    --ion-color-secondary: #6C757D;
+    --ion-color-secondary-rgb: 108,117,125;
+    --ion-color-secondary-contrast: #FFFFFF;
+    --ion-color-secondary-contrast-rgb: 255,255,255;
+    --ion-color-secondary-shade: #5F676E;
+    --ion-color-secondary-tint: #7B838A;
+    --ion-color-tertiary: #35B8E0;
+    --ion-color-tertiary-rgb: 53,184,224;
+    --ion-color-tertiary-contrast: #FFFFFF;
+    --ion-color-tertiary-contrast-rgb: 0,0,0;
+    --ion-color-tertiary-shade: #2FA2C5;
+    --ion-color-tertiary-tint: #49BFE3;
+    --ion-color-success: #10C469;
+    --ion-color-success-rgb: 16,196,105;
+    --ion-color-success-contrast: #FFFFFF;
+    --ion-color-success-contrast-rgb: 0,0,0;
+    --ion-color-success-shade: #0EAC5C;
+    --ion-color-success-tint: #28CA78;
+    --ion-color-warning: #F9C851;
+    --ion-color-warning-rgb: 249,200,81;
+    --ion-color-warning-contrast: #FFFFFF;
+    --ion-color-warning-contrast-rgb: 0,0,0;
+    --ion-color-warning-shade: #DBB047;
+    --ion-color-warning-tint: #FACE62;
+    --ion-color-danger: #FF5B5B;
+    --ion-color-danger-rgb: 255,91,91;
+    --ion-color-danger-contrast: #FFFFFF;
+    --ion-color-danger-contrast-rgb: 0,0,0;
+    --ion-color-danger-shade: #E05050;
+    --ion-color-danger-tint: #FF6B6B;
+    --ion-color-light: #F8F9FA;
+    --ion-color-light-rgb: 248,249,250;
+    --ion-color-light-contrast: #FFFFFF;
+    --ion-color-light-contrast-rgb: 0,0,0;
+    --ion-color-light-shade: #DADBDC;
+    --ion-color-light-tint: #F9FAFB;
+    --ion-color-medium: #5F5F5F;
+    --ion-color-medium-rgb: 95,95,95;
+    --ion-color-medium-contrast: #FFFFFF;
+    --ion-color-medium-contrast-rgb: 255,255,255;
+    --ion-color-medium-shade: #545454;
+    --ion-color-medium-tint: #6F6F6F;
+    --ion-color-dark: #323A46;
+    --ion-color-dark-rgb: 50,58,70;
+    --ion-color-dark-contrast: #FFFFFF;
+    --ion-color-dark-contrast-rgb: 255,255,255;
+    --ion-color-dark-shade: #2C333E;
+    --ion-color-dark-tint: #474E59;
+}

@@ -1,0 +1,109 @@
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container .button-row {
+  display: flex;
+  flex-direction: row; /* Default layout for larger screens */
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+#container .big-button {
+  --height: 200px;
+  --width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0 8px; /* Adjust spacing between buttons */
+  position: relative;
+  text-align: center;
+}
+
+#container .button-icon {
+  font-size: 120px; /* Adjust icon size as needed */
+  color: #fff; /* Change icon color as needed */
+}
+
+#container .button-text {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #fff; /* Adjust text color as needed */
+}
+
+#container .logout-button {
+  --height: 100px;
+  --width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  position: relative;
+  text-align: center;
+}
+
+#container .logout-button .button-icon {
+  font-size: 80px; /* Adjust icon size as needed */
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+ion-content {
+  --padding-top: 10%;
+  --padding-start: 10%;
+  --padding-end: 10%;
+  --background: url('../../../assets/images/BACKDROP.png')
+    0 0/100% 100% no-repeat;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 767px) {
+  #container .button-row {
+    flex-direction: column; /* Stack buttons vertically on small screens */
+    align-items: center;
+  }
+
+  #container .big-button {
+    margin: 8px 0; /* Adjust spacing between stacked buttons */
+    --height: 150px; /* Adjust button height for smaller screens */
+    --width: 150px; /* Adjust button width for smaller screens */
+  }
+
+  #container .button-icon {
+    font-size: 80px; /* Adjust icon size for smaller screens */
+  }
+
+  #container .button-text {
+    font-size: 14px; /* Adjust text size for smaller screens */
+  }
+
+  #container .logout-button {
+    --height: 80px; /* Adjust button height for smaller screens */
+  }
+
+  #container .logout-button .button-icon {
+    font-size: 60px; /* Adjust icon size for smaller screens */
+  }
+}

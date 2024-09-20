@@ -1,0 +1,19 @@
+.section-header {
+    background-color: #71b6f9;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-size: 1.2em; 
+    text-align: center; 
+}
+
+.approved-yes {
+    border: 1px solid #5bcc0f;
+    border-radius: 5px;
+  }
+  
+  .approved-no {
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+  }

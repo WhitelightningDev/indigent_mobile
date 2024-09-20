@@ -1,0 +1,88 @@
+<label *ngIf="loading">Loading...</label>
+<div class="card card-transparent" *ngIf="!loading">
+  <div class="nav nav-pills navtab nav-justified mb-2">
+    <div class="nav-item">
+      <a data-bs-toggle="tab" aria-expanded="true" class="nav-link active">
+        Application Images
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <app-application-image
+          [Name]="'Left thumb'"
+          [Image]="Left_Thumb"
+          (selectImage)="selectImage($event)"
+        ></app-application-image>
+      </div>
+      <div class="col-6">
+        <app-application-image
+          [Name]="'Right thumb'"
+          [Image]="Right_Thumb"
+          (selectImage)="selectImage($event)"
+        ></app-application-image>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <app-application-image
+          [Name]="'ID Document'"
+          [Image]="ID_Document"
+          (selectImage)="selectImage($event)"
+        ></app-application-image>
+      </div>
+      <div class="col-6">
+        <app-application-image
+          [Name]="'Selfie'"
+          [Image]="Selfie"
+          (selectImage)="selectImage($event)"
+        ></app-application-image>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <app-application-image
+          [Name]="'Municipal Account'"
+          [Image]="Municipal_Account"
+          (selectImage)="selectImage($event)"
+        ></app-application-image>
+      </div>
+      <div class="col-4">
+        <app-application-image
+          [Name]="'Payslip Image'"
+          [Image]="Payslip_Image"
+          (selectImage)="selectImage($event)"
+        ></app-application-image>
+      </div>
+      <div class="col-4">
+        <app-application-image
+          [Name]="'SASSA Card'"
+          [Image]="SASSA_Card"
+          (selectImage)="selectImage($event)"
+        ></app-application-image>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #imagePreviewModal let-c="close">
+  <div class="modal-header">Image preview</div>
+  <div class="modal-body mx-auto mw-100" *ngIf="selectedImage">
+    <img
+      class="img-responsive img-fit-container"
+      src="{{ selectedImage }}"
+      alt="Image"
+    />
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      data-dismiss="modal"
+      (click)="c()"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

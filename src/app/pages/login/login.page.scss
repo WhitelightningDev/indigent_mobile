@@ -1,0 +1,23 @@
+ion-content {
+	--padding-top: 10%;
+	--padding-start: 10%;
+	--padding-end: 10%;
+	--background: url('../../../assets/images/BACKDROP.png')
+		0 0/100% 100% no-repeat;
+}
+
+.input-group {
+	background: #fff;
+	border-radius: 10px;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+.errors {
+	font-size: small;
+	color: var(--ion-color-danger);
+	background: transparent;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
