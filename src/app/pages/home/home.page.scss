@@ -38,16 +38,22 @@
   color: #fff; /* Adjust text color as needed */
 }
 
-#container .logout-button {
-  --height: 100px;
-  --width: 100%;
+.logout-button {
+  width: 30%;
+  height: 60px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  border-radius: 20px;
   align-items: center;
   padding: 0;
   position: relative;
   text-align: center;
+  top: 100px;
+  left: 35%;
+
+  /* Add background color and box-shadow */
+  background-color: #fff; /* Set background color */
+  box-shadow: 10px 10px 16px rgba(0, 0, 0, 0.2); /* Adjust values as needed */
 }
 
 #container .logout-button .button-icon {
@@ -70,8 +76,8 @@ ion-content {
   --padding-top: 10%;
   --padding-start: 10%;
   --padding-end: 10%;
-  --background: url('../../../assets/images/BACKDROP.png')
-    0 0/100% 100% no-repeat;
+  --background: url("../../../assets/images/BACKDROP.png") 0 0/100% 100%
+    no-repeat;
 }
 
 #container a {
@@ -101,6 +107,7 @@ ion-content {
 
   #container .logout-button {
     --height: 80px; /* Adjust button height for smaller screens */
+    width: 40%;
   }
 
   #container .logout-button .button-icon {
