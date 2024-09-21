@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Home </ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,15 +9,20 @@
     <div class="button-row">
       <ion-button class="big-button" [routerLink]="['/new']">
         <ion-row>
-          <ion-icon name="person-add-outline" class="button-icon"></ion-icon
-        ></ion-row>
-        <ion-row><div class="button-text">New Application</div></ion-row>
+          <ion-icon name="person-add-outline" class="button-icon"></ion-icon>
+        </ion-row>
+        <ion-row>
+          <div class="button-text">New Application</div>
+        </ion-row>
       </ion-button>
+
       <ion-button class="big-button" [routerLink]="['/existing']">
-        <ion-row
-          ><ion-icon name="people-outline" class="button-icon"></ion-icon
-        ></ion-row>
-        <ion-row> <div class="button-text">Existing Application</div></ion-row>
+        <ion-row>
+          <ion-icon name="people-outline" class="button-icon"></ion-icon>
+        </ion-row>
+        <ion-row>
+          <div class="button-text">Existing Application</div>
+        </ion-row>
       </ion-button>
     </div>
 

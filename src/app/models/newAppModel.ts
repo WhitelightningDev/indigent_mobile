@@ -6,6 +6,7 @@ export class VillageModel {
 export class PersonModel {
   public ID_Number: string;
   public First_Names: string;
+  public Middle_Name: string;
   public Surname: string;
   public DOB: string;
   public Username: string;

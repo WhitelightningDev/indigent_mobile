@@ -1,116 +1,108 @@
 #container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container .button-row {
+.button-row {
   display: flex;
-  flex-direction: row; /* Default layout for larger screens */
+  flex-direction: row;
   justify-content: center;
   margin-bottom: 16px;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
-#container .big-button {
-  --height: 200px;
-  --width: 200px;
+.big-button {
+  --height: 180px;
+  --width: 180px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0;
-  margin: 0 8px; /* Adjust spacing between buttons */
-  position: relative;
+  padding: 10px;
+  margin: 8px;
+  color: #fff;
+  border-radius: 12px;
   text-align: center;
 }
 
-#container .button-icon {
-  font-size: 120px; /* Adjust icon size as needed */
-  color: #fff; /* Change icon color as needed */
+.button-icon {
+  font-size: 100px;
+  color: #fff;
 }
 
-#container .button-text {
-  margin-top: 8px;
+.button-text {
+  margin-top: 10px;
   font-size: 16px;
-  color: #fff; /* Adjust text color as needed */
+  font-weight: bold;
+  color: #fff;
 }
 
 .logout-button {
-  width: 30%;
+  width: 60%;
   height: 60px;
-  display: flex;
-  justify-content: center;
   border-radius: 20px;
-  align-items: center;
-  padding: 0;
-  position: relative;
+  margin-top: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: #eb445a;
+  color: #fff;
   text-align: center;
-  top: 100px;
-  left: 35%;
-
-  /* Add background color and box-shadow */
-  background-color: #fff; /* Set background color */
-  box-shadow: 10px 10px 16px rgba(0, 0, 0, 0.2); /* Adjust values as needed */
-}
-
-#container .logout-button .button-icon {
-  font-size: 80px; /* Adjust icon size as needed */
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  color: #8c8c8c;
-  margin: 0;
 }
 
 ion-content {
-  --padding-top: 10%;
-  --padding-start: 10%;
-  --padding-end: 10%;
-  --background: url("../../../assets/images/BACKDROP.png") 0 0/100% 100%
-    no-repeat;
+  --padding: 10%;
+  --background: url("../../../assets/images/BACKDROP.png") center center / cover no-repeat;
 }
 
-#container a {
+a {
   text-decoration: none;
+  color: inherit;
 }
 
-/* Media query for smaller screens */
+/* Media Queries */
 @media (max-width: 767px) {
-  #container .button-row {
-    flex-direction: column; /* Stack buttons vertically on small screens */
-    align-items: center;
+  .button-row {
+    flex-direction: column; /* Stack buttons vertically */
   }
 
-  #container .big-button {
-    margin: 8px 0; /* Adjust spacing between stacked buttons */
-    --height: 150px; /* Adjust button height for smaller screens */
-    --width: 150px; /* Adjust button width for smaller screens */
+  .big-button {
+    --height: 150px;
+    --width: 150px;
+    margin: 12px 0;
   }
 
-  #container .button-icon {
-    font-size: 80px; /* Adjust icon size for smaller screens */
+  .button-icon {
+    font-size: 80px;
   }
 
-  #container .button-text {
-    font-size: 14px; /* Adjust text size for smaller screens */
+  .button-text {
+    font-size: 14px;
   }
 
-  #container .logout-button {
-    --height: 80px; /* Adjust button height for smaller screens */
-    width: 40%;
+  .logout-button {
+    width: 80%;
+    height: 50px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .big-button {
+    --height: 170px;
+    --width: 170px;
   }
 
-  #container .logout-button .button-icon {
-    font-size: 60px; /* Adjust icon size for smaller screens */
+  .button-icon {
+    font-size: 90px;
+  }
+
+  .button-text {
+    font-size: 15px;
+  }
+
+  .logout-button {
+    width: 50%;
   }
 }
