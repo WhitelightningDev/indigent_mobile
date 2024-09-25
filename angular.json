@@ -37,7 +37,15 @@
               "src/global.scss",
               "src/theme/variables.scss"
             ],
-            "scripts": []
+            "scripts": [],
+
+            "allowedCommonJsDependencies": [
+              "devextreme-quill",
+              "jszip",
+              "devexpress-diagram",
+              "devexpress-gantt",
+              "moment"
+            ]
           },
           "configurations": {
             "production": {
