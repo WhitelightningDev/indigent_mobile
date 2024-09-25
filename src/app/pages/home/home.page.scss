@@ -4,34 +4,45 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  padding: 0 10px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .button-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 16px;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
-.big-button {
-  --height: 180px;
-  --width: 180px;
+.big-button,
+.logout-button {
+  --width: 40%;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 16px;
   margin: 8px;
-  color: #fff;
+
   border-radius: 12px;
+  color: #fff;
   text-align: center;
+  transition: transform 0.2s ease-in-out, background-color 0.3s;
+}
+
+.big-button:hover,
+.logout-button:hover {
+  transform: translateY(-4px); /* Lift effect */
 }
 
 .button-icon {
-  font-size: 100px;
+  font-size: 40px; /* Adjust size as needed */
   color: #fff;
+  padding: 10px;
 }
 
 .button-text {
@@ -41,20 +52,16 @@
   color: #fff;
 }
 
+/* Specific styling for the logout button */
 .logout-button {
-  width: 60%;
-  height: 60px;
-  border-radius: 20px;
-  margin-top: 20px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  background-color: #eb445a;
-  color: #fff;
-  text-align: center;
+  height: var(--height); /* Matches the height of the big buttons */
+  width: var(--width); /* Matches the width of the big buttons */
 }
 
 ion-content {
-  --padding: 10%;
-  --background: url("../../../assets/images/BACKDROP.png") center center / cover no-repeat;
+  --padding: 5%;
+  --background: url("../../../assets/images/BACKDROP.png") center center / cover
+    no-repeat;
 }
 
 a {
@@ -65,44 +72,42 @@ a {
 /* Media Queries */
 @media (max-width: 767px) {
   .button-row {
-    flex-direction: column; /* Stack buttons vertically */
+    flex-direction: column;
   }
 
-  .big-button {
-    --height: 150px;
-    --width: 150px;
+  .big-button,
+  .logout-button {
+    --width: 44%;
     margin: 12px 0;
+    text-align: center;
+  }
+  .logout-button {
+    height: 9%;
   }
 
   .button-icon {
-    font-size: 80px;
+    font-size: 40px; /* Smaller on phones */
   }
 
   .button-text {
     font-size: 14px;
-  }
-
-  .logout-button {
-    width: 80%;
-    height: 50px;
+    text-align: center;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .big-button {
-    --height: 170px;
-    --width: 170px;
+  .big-button,
+  .logout-button {
+    --width: 40%;
   }
 
   .button-icon {
-    font-size: 90px;
+    font-size: 40px; /* Slightly larger on phones */
   }
 
   .button-text {
     font-size: 15px;
-  }
-
-  .logout-button {
-    width: 50%;
+    text-align: center;
+    padding: 5px;
   }
 }
