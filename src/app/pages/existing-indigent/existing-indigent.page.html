@@ -497,11 +497,11 @@
               <ion-row>
                 <!-- <app-application-images
                   [Name]="'Left thumb'"
-                  [Image]="Left_Thumb"
+                  [Image]="Initial_Signature"
                 ></app-application-images> -->
                 <ion-col size="6">
-                  <div *ngIf="leftThumbImages.length > 0">
-                    <ion-card *ngFor="let leftThumb of leftThumbImages">
+                  <div *ngIf="initialSignatureImage.length > 0">
+                    <ion-card *ngFor="let leftThumb of initialSignatureImage">
                       <ion-card-content>
                         <img [src]="leftThumb" alt="Signature 1" />
                       </ion-card-content>
@@ -509,8 +509,8 @@
                   </div>
                 </ion-col>
                 <ion-col size="6">
-                  <div *ngIf="rightThumbImages.length > 0">
-                    <ion-card *ngFor="let rightThumb of rightThumbImages">
+                  <div *ngIf="fullSignatureImage.length > 0">
+                    <ion-card *ngFor="let rightThumb of fullSignatureImage">
                       <ion-card-content>
                         <img [src]="rightThumb" alt="Signature 2" />
                       </ion-card-content>

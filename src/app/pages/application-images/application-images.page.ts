@@ -11,7 +11,7 @@ import { BaseIndigentPage } from 'src/app/basepage';
 declare var $: any;
 
 @Component({
-  selector: 'app-application-images',
+  selector: 'app-application-image',
   templateUrl: './application-images.page.html',
   styleUrls: ['./application-images.page.scss'],
 })
@@ -25,16 +25,17 @@ export class ApplicationImagesPage extends BaseIndigentPage {
   @Input() Name: string;
   @Input() Image: string;
   @Input()
+  public placeholderImage: string = 'assets/gallery.png'; // Define the placeholder image
   public loading = true;
 
   @Input()
   public ID_Document = null;
 
   @Input()
-  public Left_Thumb = null;
+  public Initial_Signature = null;
 
   @Input()
-  public Right_Thumb = null;
+  public Full_Signature = null;
 
   @Input()
   public Municipal_Account = null;

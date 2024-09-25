@@ -20,6 +20,10 @@ import { ApplicationImageComponent } from 'src/app/application-image/application
     ReactiveFormsModule,
     DxCircularGaugeModule,
   ],
-  declarations: [ExistingIndigentPage, ApplicationImagesPage,ApplicationImageComponent]
+  declarations: [
+    ExistingIndigentPage,
+    ApplicationImagesPage,
+    ApplicationImageComponent,
+  ],
 })
 export class ExistingIndigentPageModule {}

@@ -202,8 +202,8 @@ export class BiometricService {
         ImageTypeEnum.Municipal_Account,
         ImageTypeEnum.Payslip_Image,
         ImageTypeEnum.SASSA_Card,
-        ImageTypeEnum.Left_Thumb,
-        ImageTypeEnum.Right_Thumb,
+        ImageTypeEnum.Initial_Signature,
+        ImageTypeEnum.Full_Signature,
       ];
 
       // Fetch images in parallel

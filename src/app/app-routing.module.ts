@@ -34,6 +34,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'application-images',
+    loadChildren: () =>
+      import('./pages/application-images/application-images.page').then(
+        (m) => m.ApplicationImagesPage
+      ),
+  },
+
+  {
     path: 'biometrics/:idnumber',
     loadChildren: () =>
       import('./pages/biometrics/biometrics.module').then(
