@@ -20,10 +20,10 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
   public ID_Document = null;
 
   @Input()
-  public Left_Thumb = null;
+  public Initial_Signature = null;
 
   @Input()
-  public Right_Thumb = null;
+  public Full_Signature = null;
 
   @Input()
   public Municipal_Account = null;
@@ -78,12 +78,12 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
     Know_Bank_Account: '',
     Property_Count: '',
     Sassa_Status: '',
-    Left_Thumb: '',
+    Initial_Signature: '',
     ID_Document: '',
     Selfie: '',
     Captured_By: '',
     ID_Number: '',
-    Right_Thumb: '',
+    Full_Signature: '',
     Municipal_Account: '',
     Payslip_Image: '',
     SASSA_Card: '',
@@ -115,8 +115,8 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
   applicationData: any;
   API_KEY: string;
   credentials: FormGroup;
-  leftThumbImages: string[] = [];
-  rightThumbImages: string[] = [];
+  initialSignatureImage: string[] = [];
+  fullSignatureImage: string[] = [];
   idDocumentImages: string[] = [];
   municipalAccountImages: string[] = [];
   payslipImages: string[] = [];
@@ -203,8 +203,8 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
     }
 
     const imageTypes = [
-      ImageTypeEnum.Left_Tumb,
-      ImageTypeEnum.Right_Tumb,
+      ImageTypeEnum.Initial_Signature,
+      ImageTypeEnum.Full_Signature,
       ImageTypeEnum.ID_Document,
       ImageTypeEnum.Selfie,
       ImageTypeEnum.Municipal_Account,
@@ -212,8 +212,8 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
       ImageTypeEnum.Sassa_Card,
     ];
 
-    this.leftThumbImages = [];
-    this.rightThumbImages = [];
+    this.initialSignatureImage = [];
+    this.fullSignatureImage = [];
     this.idDocumentImages = [];
     this.selfieImages = [];
     this.municipalAccountImages = [];
@@ -233,8 +233,8 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
           const result = response.result[0];
           if (result && result.length > 0) {
             const imageData = result[0];
-            let leftThumb: string;
-            let rightThumb: string;
+            let initialSig: string;
+            let FullSig: string;
             let idDoc: string;
             let selfie: string;
             let municpalAcc: string;
@@ -243,10 +243,10 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
 
             if (typeof imageData === 'object' && imageData !== null) {
               // Handle imageData as an object
-              leftThumb = imageData.Left_Tumb
+              initialSig = imageData.Left_Tumb
                 ? `data:image/png;base64,${imageData.Left_Tumb}`
                 : `data:image/png;base64,${imageData.toString()}`;
-              rightThumb = imageData.Right_Tumb
+              FullSig = imageData.Right_Tumb
                 ? `data:image/png;base64,${imageData.Right_Tumb}`
                 : `data:image/png;base64,${imageData.toString()}`;
               idDoc = imageData.ID_Document
@@ -266,18 +266,18 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
                 : `data:image/png;base64,${imageData.toString()}`;
             } else if (typeof imageData === 'string') {
               // Handle imageData as a base64 string
-              leftThumb = `data:image/png;base64,${imageData}`;
+              initialSig = `data:image/png;base64,${imageData}`;
             } else {
               throw new Error('Unexpected image data format');
             }
 
             // Store the base64 image in the appropriate array
             switch (type) {
-              case ImageTypeEnum.Left_Tumb:
-                this.leftThumbImages.push(leftThumb);
+              case ImageTypeEnum.Initial_Signature:
+                this.initialSignatureImage.push(initialSig);
                 break;
-              case ImageTypeEnum.Right_Tumb:
-                this.rightThumbImages.push(rightThumb);
+              case ImageTypeEnum.Full_Signature:
+                this.fullSignatureImage.push(FullSig);
                 break;
               case ImageTypeEnum.ID_Document:
                 this.idDocumentImages.push(idDoc);

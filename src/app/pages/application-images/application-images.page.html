@@ -11,15 +11,15 @@
     <div class="row">
       <div class="col-6">
         <app-application-image
-          [Name]="'Left thumb'"
-          [Image]="Left_Thumb"
+          [Name]="'Initial Signature'"
+          [Image]="Initial_Signature || placeholderImage"
           (selectImage)="selectImage($event)"
         ></app-application-image>
       </div>
       <div class="col-6">
         <app-application-image
-          [Name]="'Right thumb'"
-          [Image]="Right_Thumb"
+          [Name]="'Full Signature'"
+          [Image]="Full_Signature || placeholderImage"
           (selectImage)="selectImage($event)"
         ></app-application-image>
       </div>
@@ -28,14 +28,14 @@
       <div class="col-6">
         <app-application-image
           [Name]="'ID Document'"
-          [Image]="ID_Document"
+          [Image]="ID_Document || placeholderImage"
           (selectImage)="selectImage($event)"
         ></app-application-image>
       </div>
       <div class="col-6">
         <app-application-image
           [Name]="'Selfie'"
-          [Image]="Selfie"
+          [Image]="Selfie || placeholderImage"
           (selectImage)="selectImage($event)"
         ></app-application-image>
       </div>
@@ -44,21 +44,21 @@
       <div class="col-4">
         <app-application-image
           [Name]="'Municipal Account'"
-          [Image]="Municipal_Account"
+          [Image]="Municipal_Account || placeholderImage"
           (selectImage)="selectImage($event)"
         ></app-application-image>
       </div>
       <div class="col-4">
         <app-application-image
           [Name]="'Payslip Image'"
-          [Image]="Payslip_Image"
+          [Image]="Payslip_Image || placeholderImage"
           (selectImage)="selectImage($event)"
         ></app-application-image>
       </div>
       <div class="col-4">
         <app-application-image
           [Name]="'SASSA Card'"
-          [Image]="SASSA_Card"
+          [Image]="SASSA_Card || placeholderImage"
           (selectImage)="selectImage($event)"
         ></app-application-image>
       </div>

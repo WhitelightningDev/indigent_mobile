@@ -76,12 +76,12 @@ export abstract class BaseApplicationModel {
   Know_Bank_Account: string;
   Property_Count: string;
   Sassa_Status: string;
-  Left_Thumb: string;
+  Initial_Signature: string;
   ID_Document: string;
   Selfie: string;
   Captured_By: string;
   ID_Number: string;
-  Right_Thumb: string;
+  Full_Signature: string;
   Municipal_Account: string;
   Payslip_Image: string;
   SASSA_Card: string;

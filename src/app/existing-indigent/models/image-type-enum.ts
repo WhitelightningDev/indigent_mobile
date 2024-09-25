@@ -1,11 +1,11 @@
 export enum ImageTypeEnum {
-    Left_Thumb = 1,
-    Right_Thumb = 2,
-    ID_Document = 3,
-    Selfie = 4,
-    Municipal_Account = 5,
-    Payslip_Image = 6,
-    SASSA_Card = 7,
-    Left_Thumb_WSQ = 8,
-    Right_Thumb_WSQ = 9
-  }
+  Initial_Signature = 1,
+  Full_Signature = 2,
+  ID_Document = 3,
+  Selfie = 4,
+  Municipal_Account = 5,
+  Payslip_Image = 6,
+  SASSA_Card = 7,
+  Initial_Signature_WSQ = 8,
+  Full_Signature_WSQ = 9,
+}

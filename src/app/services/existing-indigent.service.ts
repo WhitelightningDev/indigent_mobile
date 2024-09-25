@@ -73,8 +73,8 @@ export class ExistingIndigentService extends BaseComponent {
 
     // Use the formatted input value in the payload
     const imageTypes = [
-      ImageTypeEnum.Left_Thumb,
-      ImageTypeEnum.Right_Thumb,
+      ImageTypeEnum.Initial_Signature,
+      ImageTypeEnum.Full_Signature,
       ImageTypeEnum.ID_Document,
       ImageTypeEnum.Selfie,
       ImageTypeEnum.Municipal_Account,

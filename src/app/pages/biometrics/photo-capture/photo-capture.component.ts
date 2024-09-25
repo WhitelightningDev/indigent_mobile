@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem';
@@ -34,8 +35,8 @@ export class PhotoCaptureComponent
     'Please take a photo of SASSA card.',
   ];
   shortdesc: string[] = [
-    'Left_Thumb',
-    'Right_Thumb',
+    'Initial_Signature',
+    'Full_Signature',
     'ID_Document',
     'Selfie',
     'Municipal_Account',
@@ -263,10 +264,10 @@ export class PhotoCaptureComponent
 
   getImageTypeFromDescription(description: string): ImageTypeEnum {
     switch (description) {
-      case 'Left_Thumb':
-        return ImageTypeEnum.Left_Thumb;
-      case 'Right_Thumb':
-        return ImageTypeEnum.Right_Thumb;
+      case 'Initial_Signature':
+        return ImageTypeEnum.Initial_Signature;
+      case 'Full_Signature':
+        return ImageTypeEnum.Full_Signature;
       case 'ID_Document':
         return ImageTypeEnum.ID_Document;
       case 'Selfie':
@@ -292,8 +293,8 @@ export class PhotoCaptureComponent
 
   async loadImages() {
     const imageTypes: ImageTypeEnum[] = [
-      ImageTypeEnum.Left_Thumb,
-      ImageTypeEnum.Right_Thumb,
+      ImageTypeEnum.Initial_Signature,
+      ImageTypeEnum.Full_Signature,
       ImageTypeEnum.ID_Document,
       ImageTypeEnum.Selfie,
       ImageTypeEnum.Municipal_Account,
