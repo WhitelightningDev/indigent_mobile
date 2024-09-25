@@ -9,58 +9,72 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-6">
-        <app-application-image
-          [Name]="'Initial Signature'"
-          [Image]="Initial_Signature || placeholderImage"
-          (selectImage)="selectImage($event)"
-        ></app-application-image>
+      <div class="col-md-6 mb-3">
+        <div class="image-card">
+          <app-application-image
+            [Name]="'Initial Signature'"
+            [Image]="Initial_Signature || placeholderImage"
+            (selectImage)="selectImage($event)"
+          ></app-application-image>
+        </div>
       </div>
-      <div class="col-6">
-        <app-application-image
-          [Name]="'Full Signature'"
-          [Image]="Full_Signature || placeholderImage"
-          (selectImage)="selectImage($event)"
-        ></app-application-image>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <app-application-image
-          [Name]="'ID Document'"
-          [Image]="ID_Document || placeholderImage"
-          (selectImage)="selectImage($event)"
-        ></app-application-image>
-      </div>
-      <div class="col-6">
-        <app-application-image
-          [Name]="'Selfie'"
-          [Image]="Selfie || placeholderImage"
-          (selectImage)="selectImage($event)"
-        ></app-application-image>
+      <div class="col-md-6 mb-3">
+        <div class="image-card">
+          <app-application-image
+            [Name]="'Full Signature'"
+            [Image]="Full_Signature || placeholderImage"
+            (selectImage)="selectImage($event)"
+          ></app-application-image>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-4">
-        <app-application-image
-          [Name]="'Municipal Account'"
-          [Image]="Municipal_Account || placeholderImage"
-          (selectImage)="selectImage($event)"
-        ></app-application-image>
+      <div class="col-md-6 mb-3">
+        <div class="image-card">
+          <app-application-image
+            [Name]="'ID Document'"
+            [Image]="ID_Document || placeholderImage"
+            (selectImage)="selectImage($event)"
+          ></app-application-image>
+        </div>
       </div>
-      <div class="col-4">
-        <app-application-image
-          [Name]="'Payslip Image'"
-          [Image]="Payslip_Image || placeholderImage"
-          (selectImage)="selectImage($event)"
-        ></app-application-image>
+      <div class="col-md-6 mb-3">
+        <div class="image-card">
+          <app-application-image
+            [Name]="'Selfie'"
+            [Image]="Selfie || placeholderImage"
+            (selectImage)="selectImage($event)"
+          ></app-application-image>
+        </div>
       </div>
-      <div class="col-4">
-        <app-application-image
-          [Name]="'SASSA Card'"
-          [Image]="SASSA_Card || placeholderImage"
-          (selectImage)="selectImage($event)"
-        ></app-application-image>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <div class="image-card">
+          <app-application-image
+            [Name]="'Municipal Account'"
+            [Image]="Municipal_Account || placeholderImage"
+            (selectImage)="selectImage($event)"
+          ></app-application-image>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="image-card">
+          <app-application-image
+            [Name]="'Payslip Image'"
+            [Image]="Payslip_Image || placeholderImage"
+            (selectImage)="selectImage($event)"
+          ></app-application-image>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="image-card">
+          <app-application-image
+            [Name]="'SASSA Card'"
+            [Image]="SASSA_Card || placeholderImage"
+            (selectImage)="selectImage($event)"
+          ></app-application-image>
+        </div>
       </div>
     </div>
   </div>

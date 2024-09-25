@@ -1,6 +1,21 @@
+.image-card {
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensure rounded corners apply to images */
+  transition: transform 0.2s; /* Smooth hover effect */
+  background-color: white; /* White background for cards */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.image-card:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
 .img-fit-container {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+  max-width: 100%;
+  max-height: 200px; /* Set a maximum height for images */
+  width: auto;
+  height: auto;
+  display: block; /* Make sure images are block elements */
+  margin: 0 auto; /* Center images within the card */
 }
