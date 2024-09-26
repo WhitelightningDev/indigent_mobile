@@ -96,6 +96,10 @@ export class PhotoCaptureComponent
 
   ngOnDestroy() {}
 
+  onImageError(event: any) {
+    event.target.src = 'assets/gallery.png';
+  }
+
   async captureProcess() {
     try {
       if (this.currentDescriptionIndex < this.descriptions.length) {
