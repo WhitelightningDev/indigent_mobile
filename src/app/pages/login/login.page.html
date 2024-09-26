@@ -28,7 +28,9 @@
             *ngIf="(email?.dirty || email?.touched) && email?.errors"
             class="errors"
           >
-            <span *ngIf="email?.errors?.['required']">Email is required</span>
+            <span *ngIf="email?.errors?.['required']"
+              >Username is required</span
+            >
           </div>
         </div>
         <div class="row">
