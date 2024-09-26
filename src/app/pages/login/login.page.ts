@@ -1,8 +1,10 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { AuthenticationService } from '../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  private backButtonSubscription: Subscription; // Subscription for hardware back button
   credentials: FormGroup;
 
   constructor(
@@ -17,7 +20,8 @@ export class LoginPage implements OnInit {
     private authService: AuthenticationService,
     private alertController: AlertController,
     private router: Router,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private platform: Platform // Inject Platform to handle hardware back button
   ) {
     this.credentials = this.fb.group({
       email: ['', [Validators.required]],
@@ -27,11 +31,19 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  async login() {
-    if (!this.credentials) {
-      return;
-    }
+  ionViewDidEnter() {
+    // Initialize the custom back button handler when the page is fully loaded
+    this.initializeBackButtonCustomHandler();
+  }
 
+  ionViewWillLeave() {
+    // Unsubscribe when leaving the page to prevent multiple subscriptions
+    if (this.backButtonSubscription) {
+      this.backButtonSubscription.unsubscribe();
+    }
+  }
+
+  async login() {
     const loading = await this.loadingController.create();
     await loading.present();
 
@@ -51,29 +63,41 @@ export class LoginPage implements OnInit {
     }
 
     this.authService.login(email, password).subscribe(
-      async (token) => {
+      async () => {
         await loading.dismiss();
         this.router.navigateByUrl('/home', { replaceUrl: true });
       },
       async (error) => {
         await loading.dismiss();
-        // Display error alert
         const alert = await this.alertController.create({
           header: 'Login failed',
           message: error.message || 'An unexpected error occurred.',
           buttons: ['OK'],
         });
-
         await alert.present();
       }
     );
   }
 
   get email() {
-    return this.credentials?.get('email');
+    return this.credentials.get('email');
   }
 
   get password() {
-    return this.credentials?.get('password');
+    return this.credentials.get('password');
+  }
+
+  initializeBackButtonCustomHandler() {
+    // Subscribe to the hardware back button
+    this.backButtonSubscription =
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        // Call goBack when back button is pressed
+        this.goBack();
+      });
+  }
+
+  goBack() {
+    // Exit the app when the back button is pressed on the login page
+    navigator['app'].exitApp();
   }
 }

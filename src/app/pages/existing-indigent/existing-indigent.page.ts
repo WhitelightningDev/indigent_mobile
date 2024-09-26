@@ -5,14 +5,17 @@ import { Preferences } from '@capacitor/preferences';
 import { BaseApplicationModel } from './models/base-application-model';
 import { ImageTypeEnum } from '../existing-indigent/models/image-type-enum';
 import { HttpClient } from '@angular/common/http';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 import { BaseComponent } from 'src/app/services/base-components';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-existing-indigent',
   templateUrl: './existing-indigent.page.html',
   styleUrls: ['./existing-indigent.page.scss'],
 })
 export class ExistingIndigentPage extends BaseComponent implements OnInit {
+  private backButtonSubscription: Subscription;
   @Input()
   public loading = true;
 
@@ -127,7 +130,9 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
   constructor(
     private existingIndigent: ExistingIndigentService,
     private http: HttpClient,
-    private loadingCtrl: LoadingController
+    private router: Router,
+    private loadingCtrl: LoadingController,
+    private platform: Platform // Inject Platform to handle hardware back button
   ) {
     super();
   }
@@ -321,5 +326,19 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
       .map((line) => line.trim()) // Trim whitespace from each line
       .filter((line) => line.length > 0) // Remove empty lines
       .join('<br/>');
+  }
+
+  initializeBackButtonCustomHandler() {
+    // Subscribe to the hardware back button
+    this.backButtonSubscription =
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        // Call method to go to the login page when back button is pressed
+        this.navigateToLogin();
+      });
+  }
+
+  navigateToLogin() {
+    // Navigate to the login page (assuming '/' is the login route)
+    this.router.navigateByUrl('/home', { replaceUrl: true });
   }
 }

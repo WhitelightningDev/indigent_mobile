@@ -49,7 +49,7 @@
       expand="full"
       *ngIf="!finalizeBtn"
       (click)="startCaptureProcess()"
-      >Update Photo</ion-button
+      >Start Capturing</ion-button
     >
     <ion-button expand="full" *ngIf="finalizeBtn" (click)="finalize()"
       >Finalize</ion-button
@@ -78,6 +78,7 @@
     >Capture</ion-button
   >
   <ion-button expand="full" (click)="skipPhoto()">Skip</ion-button>
+  <ion-button expand="full" (click)="goBack()">Back & Refresh</ion-button>
 </ion-card>
 
 <!-- Show message if no images are found and not capturing -->

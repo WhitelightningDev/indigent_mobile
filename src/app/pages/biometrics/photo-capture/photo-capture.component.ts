@@ -96,6 +96,16 @@ export class PhotoCaptureComponent
 
   ngOnDestroy() {}
 
+  goBack() {
+    const hasRefreshed = sessionStorage.getItem('hasRefreshed') === 'true';
+
+    if (!hasRefreshed) {
+      sessionStorage.setItem('hasRefreshed', 'true'); // Set the flag to true
+    }
+
+    window.location.reload(); // Always reload the page on button click
+  }
+
   onImageError(event: any) {
     event.target.src = 'assets/gallery.png';
   }

@@ -111,3 +111,19 @@ a {
     padding: 5px;
   }
 }
+
+/* home.page.scss or global styles */
+.alert-ios {
+  --background: #fff; /* White background for the alert */
+  --color: #000; /* Black text color */
+  --border-radius: 10px; /* Rounded corners */
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+}
+
+.alert-ios .alert-button {
+  color: #007aff; /* iOS blue for buttons */
+}
+
+.alert-ios .alert-button-destructive {
+  color: #ff3b30; /* iOS red for destructive actions */
+}

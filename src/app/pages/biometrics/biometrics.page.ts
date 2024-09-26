@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular'; // Import the Platform service
-import { Subscription } from 'rxjs'; // Import Subscription to handle the back button subscription
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-biometrics',
@@ -10,43 +9,33 @@ import { Subscription } from 'rxjs'; // Import Subscription to handle the back b
   styleUrls: ['./biometrics.page.scss'],
 })
 export class BiometricsPage implements OnInit, OnDestroy {
-  private hasRefreshed: boolean = false;
-  private backButtonSubscription: Subscription; // To manage back button listener
+  private backButtonSubscription: Subscription; // Subscription for hardware back button
+  private hasRefreshed: boolean = false; // Flag to track refresh state
 
   constructor(
     private navController: NavController,
     private router: Router,
-    private platform: Platform
+    private platform: Platform // Inject Platform to handle hardware back button
   ) {}
 
   ngOnInit() {
-    this.initializeBackButtonCustomHandler(); // Initialize back button listener
+    this.initializeBackButtonCustomHandler();
   }
-
   ngOnDestroy() {
-    // Clean up the back button subscription when the component is destroyed
     if (this.backButtonSubscription) {
-      this.backButtonSubscription.unsubscribe();
+      this.backButtonSubscription.unsubscribe(); // Clean up back button listener
     }
   }
 
   initializeBackButtonCustomHandler() {
-    // Subscribe to the platform's back button event
     this.backButtonSubscription =
       this.platform.backButton.subscribeWithPriority(10, () => {
-        this.goBack(); // Call goBack() when the hardware back button is pressed
+        this.goBack(); // Call the goBack() method when the hardware back button is pressed
       });
   }
 
   goBack() {
-    const hasRefreshed = sessionStorage.getItem('hasRefreshed') === 'true';
-
-    if (!hasRefreshed) {
-      sessionStorage.setItem('hasRefreshed', 'true');
-      window.location.reload();
-    } else {
-      sessionStorage.removeItem('hasRefreshed');
-      this.router.navigate(['.']); // Navigate to the home page
-    }
+    // Navigate back to the previous page or perform other logic
+    this.router.navigate(['/new']); // Navigate to the 'new' route
   }
 }

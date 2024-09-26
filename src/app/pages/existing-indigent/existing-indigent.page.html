@@ -1,17 +1,44 @@
-<ion-header *ngIf="IdNumberValidated">
-  <ion-toolbar>
-    <ion-title
+<!-- <div
+  class="text-center logo-container"
+  style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+  "
+>
+  <a href="index.html">
+    <img
+      alt="MabLogo"
+      src="../../assets/images/Backup_logo.png"
+      height="90"
+      class="mx-auto"
+      style="z-index: -1"
+    />
+  </a>
+</div> -->
+
+<ion-header *ngIf="IdNumberValidated" style="position: relative; z-index: 1">
+  <ion-toolbar style="position: relative; z-index: 1">
+    <ion-title style="position: relative; z-index: 1"
       >Indigent Application Report - {{model.Application_Reference}}</ion-title
     >
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <div id="container" *ngIf="!IdNumberValidated">
+  <div
+    id="container"
+    *ngIf="!IdNumberValidated"
+    style="position: relative; z-index: 1"
+  >
     <form #validate="ngForm" novalidate>
       <ion-grid>
         <ion-row>
           <ion-col size="8">
-            <ion-item>
+            <ion-item class="id-input">
               <ion-input
                 label="ID Number:"
                 labelPlacement="floating"
@@ -25,6 +52,7 @@
           </ion-col>
           <ion-col size="4" class="ion-text-center">
             <ion-button
+              class="verification-button"
               expand="block"
               color="primary"
               id="ConsentModal"
@@ -39,7 +67,7 @@
     </form>
   </div>
 
-  <ion-list *ngIf="IdNumberValidated">
+  <ion-list *ngIf="IdNumberValidated" style="position: relative; z-index: 1">
     <ion-grid class="section-header1">
       <ion-row class="ion-padding">
         <ion-col size="12" size-md="10">
@@ -78,7 +106,7 @@
       </ion-row>
     </ion-grid>
 
-    <ion-grid>
+    <ion-grid style="position: relative; z-index: 1">
       <ion-row class="input-container ion-padding">
         <!-- Approved Section -->
         <ion-col
