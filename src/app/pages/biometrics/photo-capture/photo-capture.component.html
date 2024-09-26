@@ -14,15 +14,35 @@
     <ion-card-title>Captured Images</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <div style="display: flex; flex-wrap: wrap">
-      <div *ngFor="let image of images; let i = index" style="margin: 10px">
+    <div
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px;
+        box-shadow: rgb(61, 61, 61);
+      "
+    >
+      <div
+        *ngFor="let image of images; let i = index"
+        style="text-align: center; max-width: 150px"
+      >
         <!-- If image.src is available, display it; else show the placeholder 'gallery.png' -->
         <img
-          [src]="image.src || 'assets/gallery.png'"
+          [src]="image.src"
+          (error)="image.src = 'assets/gallery.png'"
           alt="{{ image.shortDesc }}"
-          style="width: 150px; height: auto"
+          style="
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          "
         />
-        <p>{{ ImageDesc[i] }}</p>
+        <p style="margin-top: 8px; font-size: 14px; color: #555">
+          {{ ImageDesc[i] }}
+        </p>
       </div>
     </div>
     <ion-button
