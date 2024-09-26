@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
 import {
   AfterViewInit,
   Component,
