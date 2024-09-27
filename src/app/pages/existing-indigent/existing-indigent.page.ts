@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Pipe } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Pipe } from '@angular/core';
 import { ExistingIndigentService } from '../../../../src/app/services/existing-indigent.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Preferences } from '@capacitor/preferences';
@@ -9,12 +9,16 @@ import { LoadingController, Platform } from '@ionic/angular';
 import { BaseComponent } from 'src/app/services/base-components';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-existing-indigent',
   templateUrl: './existing-indigent.page.html',
   styleUrls: ['./existing-indigent.page.scss'],
 })
-export class ExistingIndigentPage extends BaseComponent implements OnInit {
+export class ExistingIndigentPage
+  extends BaseComponent
+  implements OnInit, OnDestroy
+{
   private backButtonSubscription: Subscription;
   @Input()
   public loading = true;
@@ -50,6 +54,7 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
   submitting: boolean = false;
   IdNumberValidated: boolean = false;
   ID_Number: string = '';
+  public placeholderImage: string = 'assets/gallery.png'; // Define a default placeholder image
 
   isModalOpen = false;
   model: BaseApplicationModel = {
@@ -132,7 +137,8 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private loadingCtrl: LoadingController,
-    private platform: Platform // Inject Platform to handle hardware back button
+    private platform: Platform, // Inject Platform to handle hardware back button
+    private location: Location // Inject Location service to handle browser-like back navigation
   ) {
     super();
   }
@@ -143,6 +149,7 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
   apiKey: string = '';
   ngOnInit(): void {
     this.IdNumberValidated = false;
+    this.initializeBackButtonCustomHandler();
   }
 
   setOpen(isOpen: boolean) {
@@ -328,17 +335,38 @@ export class ExistingIndigentPage extends BaseComponent implements OnInit {
       .join('<br/>');
   }
 
+  // Initialize back button handling
   initializeBackButtonCustomHandler() {
-    // Subscribe to the hardware back button
     this.backButtonSubscription =
       this.platform.backButton.subscribeWithPriority(10, () => {
-        // Call method to go to the login page when back button is pressed
-        this.navigateToLogin();
+        this.handleBackButton();
       });
   }
 
+  handleBackButton() {
+    // Check if there is a previous navigation in history
+    if (this.router.url === '/home' || this.router.url === '/') {
+      // Already on the home page, maybe show a confirmation to exit or do nothing
+    } else if (this.router.navigated) {
+      // If the user navigated, go back to the previous page
+      this.location.back();
+    } else {
+      // No navigation history, so navigate to the home or login page
+      this.router.navigate(['/home']);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.backButtonSubscription) {
+      this.backButtonSubscription.unsubscribe();
+    }
+  }
+
   navigateToLogin() {
-    // Navigate to the login page (assuming '/' is the login route)
     this.router.navigateByUrl('/home', { replaceUrl: true });
+  }
+
+  onImageError(event: any) {
+    event.target.src = this.placeholderImage; // Set placeholder image if the original fails
   }
 }

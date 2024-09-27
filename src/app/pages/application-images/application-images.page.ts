@@ -1,10 +1,14 @@
 import {
   Component,
   Input,
+  OnDestroy,
   OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
+import { Platform } from '@ionic/angular'; // Import Platform
+import { Subscription } from 'rxjs'; // Import Subscription for back button
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseIndigentPage } from 'src/app/basepage';
@@ -15,11 +19,19 @@ declare var $: any;
   templateUrl: './application-images.page.html',
   styleUrls: ['./application-images.page.scss'],
 })
-export class ApplicationImagesPage extends BaseIndigentPage {
+export class ApplicationImagesPage
+  extends BaseIndigentPage
+  implements OnInit, OnDestroy
+{
   @ViewChild('imagePreviewModal') modalTemplate: TemplateRef<any>;
   selectedImage: any = null;
   selectedImageWidth: number;
-  constructor(private modalService: NgbModal) {
+  private backButtonSubscription: Subscription;
+  constructor(
+    private modalService: NgbModal,
+    private router: Router,
+    private platform: Platform
+  ) {
     super();
   }
   @Input() Name: string;
@@ -55,5 +67,38 @@ export class ApplicationImagesPage extends BaseIndigentPage {
       await this.modalService.open(this.modalTemplate).result;
       // $("#imagePreviewModal").modal('show');
     });
+  }
+
+  // Fallback to placeholder image if original image fails to load
+  onImageError(event: any) {
+    event.target.src = this.placeholderImage;
+  }
+
+  // Lifecycle hook to initialize back button handler
+  ngOnInit(): void {
+    this.initializeBackButtonCustomHandler();
+  }
+
+  // Subscribe to the back button event
+  initializeBackButtonCustomHandler() {
+    this.backButtonSubscription =
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        this.handleBackButton(); // Call method to handle back button action
+      });
+  }
+
+  // Handle the back button action
+  handleBackButton() {
+    // Navigate back to the previous page and refresh
+    this.router.navigateByUrl(this.router.url).then(() => {
+      window.location.reload(); // Refresh the current page after navigation
+    });
+  }
+
+  // Unsubscribe from back button on component destruction to avoid memory leaks
+  ngOnDestroy() {
+    if (this.backButtonSubscription) {
+      this.backButtonSubscription.unsubscribe();
+    }
   }
 }

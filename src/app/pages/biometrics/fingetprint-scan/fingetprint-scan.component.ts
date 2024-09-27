@@ -4,8 +4,9 @@ import {
   HostListener,
   OnInit,
   ViewChild,
+  ChangeDetectorRef,
 } from '@angular/core';
-import SignaturePad from 'signature_pad'; // Make sure to import the SignaturePad library
+import SignaturePad from 'signature_pad';
 
 @Component({
   selector: 'app-fingetprint-scan',
@@ -18,28 +19,27 @@ export class FingetprintScanComponent implements OnInit {
   canvasWidth: number;
   canvasHeight: number;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.init();
-    this.clear();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.init(); // Reinitialize the canvas on window resize
+    this.init();
   }
 
   init() {
     const canvas: HTMLCanvasElement = this.signaturePadElement.nativeElement;
     this.canvasWidth = window.innerWidth;
-    this.canvasHeight = window.innerHeight - 300; // Adjust this as needed
+    this.canvasHeight = window.innerHeight - 300; // Adjust as needed
     canvas.width = this.canvasWidth;
     canvas.height = this.canvasHeight;
 
     // Initialize the SignaturePad
     this.signaturePad = new SignaturePad(canvas);
-    this.signaturePad.clear(); // Clear the pad on init
+    console.log('SignaturePad initialized');
   }
 
   public save(): string {
@@ -56,7 +56,20 @@ export class FingetprintScanComponent implements OnInit {
   }
 
   public clear() {
-    this.signaturePad.clear(); // Clear the signature pad
+    if (this.signaturePad) {
+      console.log('Clearing signature pad');
+
+      // Immediately clear the pad
+      this.signaturePad.clear(); // Clear the signature pad
+
+      // Force change detection
+      this.cd.detectChanges();
+
+      // Optionally, use requestAnimationFrame to ensure canvas updates
+      requestAnimationFrame(() => {
+        this.cd.detectChanges(); // Force update again
+      });
+    }
   }
 
   undo() {

@@ -13,7 +13,8 @@
         <div class="image-card">
           <app-application-image
             [Name]="'Initial Signature'"
-            [Image]="Initial_Signature || placeholderImage"
+            [Image]="Initial_Signature"
+            [placeholderImage]="placeholderImage"
             (selectImage)="selectImage($event)"
           ></app-application-image>
         </div>
@@ -22,7 +23,8 @@
         <div class="image-card">
           <app-application-image
             [Name]="'Full Signature'"
-            [Image]="Full_Signature || placeholderImage"
+            [Image]="Full_Signature"
+            [placeholderImage]="placeholderImage"
             (selectImage)="selectImage($event)"
           ></app-application-image>
         </div>

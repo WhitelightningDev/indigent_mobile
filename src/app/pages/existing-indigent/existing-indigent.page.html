@@ -77,7 +77,12 @@
         <ion-col size="12" size-md="2">
           <div *ngIf="selfieImages.length > 0" class="selfie-container">
             <div *ngFor="let image of selfieImages">
-              <img [src]="image" alt="Selfie Image" height="175" />
+              <img
+                (error)="onImageError($event)"
+                [src]="image"
+                alt="Selfie Image"
+                height="175"
+              />
             </div>
           </div>
         </ion-col>
@@ -499,17 +504,18 @@
           </ion-header>
           <ion-content class="scrollable-modal">
             <ion-grid>
+              <!-- Signature Images Section -->
               <div class="section-header mt-2">Signature Images</div>
               <ion-row>
-                <!-- <app-application-images
-                  [Name]="'Left thumb'"
-                  [Image]="Initial_Signature"
-                ></app-application-images> -->
                 <ion-col size="6">
                   <div *ngIf="initialSignatureImage.length > 0">
                     <ion-card *ngFor="let leftThumb of initialSignatureImage">
                       <ion-card-content>
-                        <img [src]="leftThumb" alt="Signature 1" />
+                        <img
+                          [src]="leftThumb"
+                          (error)="onImageError($event)"
+                          alt="Signature 1"
+                        />
                       </ion-card-content>
                     </ion-card>
                   </div>
@@ -518,20 +524,29 @@
                   <div *ngIf="fullSignatureImage.length > 0">
                     <ion-card *ngFor="let rightThumb of fullSignatureImage">
                       <ion-card-content>
-                        <img [src]="rightThumb" alt="Signature 2" />
+                        <img
+                          [src]="rightThumb"
+                          (error)="onImageError($event)"
+                          alt="Signature 2"
+                        />
                       </ion-card-content>
                     </ion-card>
                   </div>
                 </ion-col>
               </ion-row>
 
+              <!-- Identification Images Section -->
               <div class="section-header mt-2">Identification Images</div>
               <ion-row>
                 <ion-col size="6">
                   <div *ngIf="idDocumentImages.length > 0">
                     <ion-card *ngFor="let image of idDocumentImages">
                       <ion-card-content>
-                        <img [src]="image" alt="ID Document Image" />
+                        <img
+                          [src]="image"
+                          (error)="onImageError($event)"
+                          alt="ID Document Image"
+                        />
                       </ion-card-content>
                     </ion-card>
                   </div>
@@ -540,20 +555,29 @@
                   <div *ngIf="selfieImages.length > 0">
                     <ion-card *ngFor="let image of selfieImages">
                       <ion-card-content>
-                        <img [src]="image" alt="Selfie Image" />
+                        <img
+                          [src]="image"
+                          (error)="onImageError($event)"
+                          alt="Selfie Image"
+                        />
                       </ion-card-content>
                     </ion-card>
                   </div>
                 </ion-col>
               </ion-row>
 
+              <!-- Other Images Section -->
               <div class="section-header mt-2">Other Images</div>
               <ion-row>
                 <ion-col size="4">
                   <div *ngIf="municipalAccountImages.length > 0">
                     <ion-card *ngFor="let image of municipalAccountImages">
                       <ion-card-content>
-                        <img [src]="image" alt="Municipal Account Image" />
+                        <img
+                          [src]="image"
+                          (error)="onImageError($event)"
+                          alt="Municipal Account Image"
+                        />
                       </ion-card-content>
                     </ion-card>
                   </div>
@@ -562,7 +586,11 @@
                   <div *ngIf="payslipImages.length > 0">
                     <ion-card *ngFor="let image of payslipImages">
                       <ion-card-content>
-                        <img [src]="image" alt="Payslip Image" />
+                        <img
+                          [src]="image"
+                          (error)="onImageError($event)"
+                          alt="Payslip Image"
+                        />
                       </ion-card-content>
                     </ion-card>
                   </div>
@@ -571,7 +599,11 @@
                   <div *ngIf="sassaCardImages.length > 0">
                     <ion-card *ngFor="let image of sassaCardImages">
                       <ion-card-content>
-                        <img [src]="image" alt="SASSA Card Image" />
+                        <img
+                          [src]="image"
+                          (error)="onImageError($event)"
+                          alt="SASSA Card Image"
+                        />
                       </ion-card-content>
                     </ion-card>
                   </div>
@@ -580,7 +612,5 @@
             </ion-grid>
           </ion-content>
         </ng-template>
-      </ion-modal>
-    </ion-grid>
-  </ion-list>
-</ion-content>
+      </ion-modal> </ion-grid></ion-list
+></ion-content>
