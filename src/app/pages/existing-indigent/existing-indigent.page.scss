@@ -4,10 +4,22 @@
   text-align: center;
 }
 
+ion-card {
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.modal-wall {
+  background-color: rgba(255, 255, 255, 0.801);
+}
+
 ion-content {
   --padding: 5%;
   --background: url("../../../assets/images/backdrop-logo.png") center center /
     cover no-repeat;
+}
+
+ion-row {
+  border-radius: 20px;
 }
 
 .section-header {
@@ -41,6 +53,7 @@ ion-content {
 }
 
 .scrollable-modal {
+  background-color: #71b6f9;
   height: 100%;
   overflow-y: auto;
 }

@@ -245,7 +245,7 @@ export class PhotoCaptureComponent
         if (response.result[0].Error) {
           this.showErrorToast(response.result[0].error);
         } else {
-          this.showSuccessToast(response.result[0].Success);
+          this.showSuccessToast('Application Saved Successfully');
         }
         this.router.navigate(['/home']);
       })
