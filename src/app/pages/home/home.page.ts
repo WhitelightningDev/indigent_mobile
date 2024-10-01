@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Confirm Logout',
       message: 'Are you sure you want to logout?',
-      cssClass: 'alert-ios', // Custom CSS class for iOS style
+      cssClass: 'alert-ios',
       buttons: [
         {
           text: 'No',
@@ -69,7 +69,7 @@ export class HomePage implements OnInit {
             const secondAlert = await this.alertController.create({
               header: 'Before You Go!',
               message: 'Do you want to go to the login page or close the app?',
-              cssClass: 'alert-ios', // Custom CSS class for iOS style
+              cssClass: 'alert-ios',
               buttons: [
                 {
                   text: 'Close App',

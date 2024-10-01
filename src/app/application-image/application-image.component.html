@@ -1,13 +1,15 @@
-<div class="card mb-2 border" *ngIf="Image" (click)="showImage(Image)">
-  <div class="row my-2">
-    <div class="col-md-12 text-center">
-      <img class="image" [src]="Image" [alt]="Name" />
+<div class="blur-background" *ngIf="Image" (click)="showImage(Image)">
+  <div class="card mb-2 border">
+    <div class="row my-2">
+      <div class="col-md-12 text-center">
+        <img class="image" [src]="Image" [alt]="Name" />
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card-title text-center">
-        {{ Name }}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card-title text-center">
+          {{ Name }}
+        </div>
       </div>
     </div>
   </div>
