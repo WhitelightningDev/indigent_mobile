@@ -121,7 +121,7 @@ export class PhotoCaptureComponent
       }
     } catch {
       this.showErrorToast(
-        'An error has occurred pleas try again later or contact support'
+        'An error has occurred please try again later or contact support'
       );
     }
   }

@@ -1,4 +1,17 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
-  "cSpell.words": ["basepage", "idnumber", "shortdesc"]
+  "cSpell.words": [
+    "basepage",
+    "Bires",
+    "devextreme",
+    "devkit",
+    "fontawesome",
+    "fortawesome",
+    "haptics",
+    "idnumber",
+    "ionicons",
+    "popperjs",
+    "shortdesc",
+    "toastr"
+  ]
 }
