@@ -128,6 +128,7 @@
                 labelPlacement="floating"
                 placeholder="+27 00 000 000"
                 [(ngModel)]="model.Cell"
+                (ionInput)="formatPhoneNumber(model.Cell)"
                 name="cell"
               ></ion-input
               ><ion-button

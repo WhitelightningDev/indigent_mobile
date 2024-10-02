@@ -267,8 +267,6 @@ export class NewIndigentService {
 
   private fixCellNumberForOTP(cellNumber: string) {
     let result = '';
-
-    // Remove leading zeros
     if (cellNumber.startsWith('0')) {
       result = '27' + cellNumber.substring(1);
     } else if (cellNumber.startsWith('+27')) {
@@ -276,41 +274,34 @@ export class NewIndigentService {
     } else if (cellNumber.startsWith('27')) {
       result = cellNumber;
     } else if (cellNumber.length === 9 && !cellNumber.startsWith('27')) {
-      // If it's 9 digits long and doesn't start with "27", assume it's a local number
       result = '27' + cellNumber;
     } else {
-      // Otherwise, assume it's already formatted correctly
       result = cellNumber;
     }
-
     return result;
   }
 
   public sendOtpSms(apiKey: string, cellNumber: string): Promise<string> {
     return new Promise<any>(async (resolve, reject) => {
       sessionStorage.removeItem('CELL_OTP');
-
       let otpCellNumber = this.fixCellNumberForOTP(cellNumber);
-      var params: string =
-        `${encodeURIComponent(apiKey)}` +
-        `/${encodeURIComponent(otpCellNumber)}`;
+      const params: string = `${encodeURIComponent(
+        apiKey
+      )}/${encodeURIComponent(otpCellNumber)}`;
+
       await firstValueFrom(
         this.http
           .get<any>(
-            `https://mabureauonline.co.za/mabcloud/RestServer/RestAPI/Send_OTP_SMS/` +
-              params
+            `https://mabureauonline.co.za/mabcloud/RestServer/RestAPI/Send_OTP_SMS/${params}`
           )
           .pipe(
             map((jsonData: any) => {
               if (jsonData.result && jsonData.result.length > 0) {
                 const result = jsonData.result[0].OTP;
-
                 sessionStorage.setItem('CELL_OTP', result);
                 resolve(result);
-                return result;
               } else {
                 resolve(null);
-                return of([]);
               }
             }),
             catchError((error) => {

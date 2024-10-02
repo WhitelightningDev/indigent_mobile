@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 /* eslint-disable @angular-eslint/use-lifecycle-interface */
 import {
   AfterViewInit,
@@ -21,6 +22,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 declare var google;
+import { ToastrModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-new-indigent',
@@ -45,7 +47,8 @@ export class NewIndigentPage extends BaseComponent implements OnInit {
   constructor(
     private IndigentService: NewIndigentService,
     public router: Router,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private ToastController: ToastrModule
   ) {
     super();
   }
@@ -61,6 +64,49 @@ export class NewIndigentPage extends BaseComponent implements OnInit {
         this.ViewInput();
       }
     }, 500);
+  }
+
+  formatPhoneNumber(input: string) {
+    if (input.startsWith('0')) {
+      this.model.Cell = '+27' + input.substring(1);
+    }
+  }
+
+  public validateNumber() {
+    // Validate the number format
+    if (!this.model.Cell.startsWith('+27')) {
+      this.showErrorToast('Please enter a number starting with +27');
+      return;
+    }
+
+    // Check if the number contains an additional 0 after +27
+    const cellWithoutPlus27 = this.model.Cell.replace('+27', '');
+    if (cellWithoutPlus27.startsWith('0')) {
+      this.showErrorToast('Invalid number: Please do not add a 0 after +27');
+      return;
+    }
+
+    // Remove spaces and check if the length is valid
+    const cleanedNumber = cellWithoutPlus27.replace(/\s+/g, '');
+    if (cleanedNumber.length !== 10) {
+      this.showErrorToast('Invalid number: Please enter a 10-digit number');
+      return;
+    }
+
+    // Extract the original local number (10 digits)
+    const localCellNumber = cleanedNumber;
+
+    // Call the sendOtpSms method from the service with the original local number
+    const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+    this.IndigentService.sendOtpSms(apiKey, localCellNumber)
+      .then((otp) => {
+        console.log('OTP sent:', otp);
+        // Handle successful OTP sending (e.g., show a success message)
+      })
+      .catch((error) => {
+        console.error('Error sending OTP:', error);
+        // Handle error in OTP sending (e.g., show an error message)
+      });
   }
 
   ViewInput() {
