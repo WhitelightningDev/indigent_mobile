@@ -57,7 +57,6 @@ export class LoginPage implements OnInit {
         message: 'Email or password is missing.',
         buttons: ['OK'],
       });
-
       await alert.present();
       return;
     }
@@ -69,9 +68,21 @@ export class LoginPage implements OnInit {
       },
       async (error) => {
         await loading.dismiss();
+
+        let message = 'An unexpected error occurred. Please try again later.';
+        if (error.status === 400) {
+          message =
+            'Invalid credentials. Please check your email and password.';
+        } else if (error.status === 401) {
+          message =
+            'Unauthorized access. Please log in with valid credentials.';
+        } else if (error.status === 0) {
+          message = 'Network error. Please check your internet connection.';
+        }
+
         const alert = await this.alertController.create({
           header: 'Login failed',
-          message: error.message || 'An unexpected error occurred.',
+          message,
           buttons: ['OK'],
         });
         await alert.present();

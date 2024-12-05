@@ -21,3 +21,164 @@ ion-content {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+/* Media Queries */
+
+/* Large Monitors and Desktops */
+@media screen and (min-width: 1200px) {
+  ion-content {
+    --padding-top: 8%;
+    --padding-start: 15%;
+    --padding-end: 15%;
+  }
+
+  .card {
+    position: relative;
+    top: 20%;
+    margin: 0 auto;
+    width: 50%;
+    padding: 30px;
+  }
+
+  .text-center h2 {
+    font-size: 2rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .errors {
+    font-size: 0.9rem;
+  }
+}
+
+/* Medium Laptops and Smaller Desktops */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  ion-content {
+    --padding-top: 7%;
+    --padding-start: 12%;
+    --padding-end: 12%;
+  }
+
+  .card {
+    margin: 0 auto;
+    width: 60%;
+    padding: 25px;
+  }
+
+  .text-center h2 {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .errors {
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablets and Medium Devices */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  ion-content {
+    --padding-top: 6%;
+    --padding-start: 10%;
+    --padding-end: 10%;
+  }
+
+  .img-responsive {
+    position: relative;
+    top: 10%;
+  }
+
+  .card {
+    position: relative;
+    top: 20%;
+    margin: 0 10px;
+    padding: 20px;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .text-center h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .errors {
+    font-size: 0.8rem;
+  }
+}
+
+/* Large Mobile Devices */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  ion-content {
+    --padding-top: 5%;
+    --padding-start: 7%;
+    --padding-end: 7%;
+  }
+
+  .img-responsive {
+    position: relative;
+    top: 10%;
+  }
+
+  .card {
+    position: relative;
+    top: 20%;
+    margin: 0 8px;
+    padding: 18px;
+  }
+
+  .text-center h2 {
+    font-size: 1.3rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 9px;
+  }
+
+  .errors {
+    font-size: 0.75rem;
+  }
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+  ion-content {
+    --padding-top: 5%;
+    --padding-start: 5%;
+    --padding-end: 5%;
+  }
+
+  .card {
+    position: relative;
+    top: 20%;
+    margin: 0 5px;
+    padding: 15px;
+  }
+
+  .text-center h2 {
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  .errors {
+    font-size: 0.75rem;
+  }
+}
